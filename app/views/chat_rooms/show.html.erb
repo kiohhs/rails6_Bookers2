@@ -1,0 +1,22 @@
+<div class='container px-5 px-sm-0'>
+  <h2>
+    <%= @user.name %>さんとのチャット
+  </h2>
+  <div id="chat_messages">
+    <% @chat_messages.each do |chat_message| %>
+      <% if current_user.id == chat_message.user_id %>
+        <%= render partial: 'chat_messages/self_chat_message', locals: { message: chat_message.message } %>
+      <% else %>
+        <%= render partial: 'chat_messages/other_chat_message', locals: { message: chat_message.message } %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= form_with model: @chat_message, local: false, class: "d-flex align-items-center" do |f| %>
+    <%= f.hidden_field :chat_room_id %>
+    <%= f.text_field :message, class: "flex-grow-1" %>
+    <%= f.submit "送信", class: "btn btn-primary btn-sm" %>
+  <% end %>
+  <div id="chat_message_error_messages">
+
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% unless user == current_user %>
+  <% if current_user.following?(user) %>
+    <%= link_to "following", user_relationships_path(user), class: "btn btn-primary btn-block", method: :delete, remote: true %>
+  <% else %>
+    <%= link_to "follow", user_relationships_path(user), class: "btn btn-outline-primary btn-block", method: :post, remote: true %>
+  <% end %>
+<% end %>

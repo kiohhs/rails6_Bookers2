@@ -1,0 +1,7 @@
+<% if @chat_message.valid? %>
+$('#chat_messages').append('<%= j(render partial: "chat_messages/self_chat_message", locals: {message: @chat_message.message}) %>');
+$('#chat_message_message').val("");
+$('#chat_message_error_messages').empty();
+<% else %>
+$('#chat_message_error_messages').html('<%= j(render partial: "layouts/errors", locals: {obj: @chat_message}) %>');
+<% end %>
